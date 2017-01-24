@@ -25,6 +25,7 @@
   </target>
 
   <target name="lint" description="Perform syntax check of sourcecode files">
+    <echo message="${sourcedir}"/>    
     <apply executable="php" failonerror="true">
     <arg value="-l" />
     <fileset dir="${sourcedir}">
