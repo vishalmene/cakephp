@@ -196,7 +196,7 @@
  * CakePHP session IDs are also regenerated between requests if
  * 'Security.level' is set to 'high'.
  */
-	Configure::write'Security.level', 'medium')
+	Configure::write('Security.level', 'medium');
 
 /**
  * A random string used in security hashing methods.
@@ -206,7 +206,7 @@
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '543543534534534543554354353');
+	Configure::write('Security.cipherSeed', '54354353453453454355435');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
