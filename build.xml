@@ -47,7 +47,7 @@
       <arg value="--report=checkstyle" />
       <arg value="--report-file=${builddir}/logs/checkstyle.xml" />
       <arg value="--standard=CakePHP" />
-      <arg value="--ignore=*/plugins/*,*/locale/*,*/tmp/*,*/vendors/*,*/webroot/*" />
+      <arg value="--ignore=*/plugins/*,*/locale/*,*/tmp/*,*/vendors/*,*/webroot/*,*/config/*" />
       <arg path="${sourcedir}" />
     </exec>
   </target>
