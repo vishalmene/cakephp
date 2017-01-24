@@ -59,7 +59,7 @@
       <arg value="--log-pmd" />
       <arg value="${builddir}/logs/pmd-cpd.xml" />
       <arg value="--exclude" />
-      <arg value="plugins" />
+      <arg value="*/plugins/*" />
       <arg value="--exclude" />
       <arg value="locale" />
       <arg value="--exclude" />
@@ -70,7 +70,7 @@
       <arg value="webroot" />     
       <arg value="--exclude" />
       <arg value="config" />                        
-      <arg path="${sourcedir}" />
+      <arg path="../${sourcedir}" />
     </exec>
   </target>
 
