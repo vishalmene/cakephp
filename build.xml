@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>      
+            
+<project name="LibraryIdea" default="build">                    
+  <property name="workspace" value="${basedir}" />
+  <property name="sourcedir" value="${basedir}" />
+  <property name="builddir" value="${workspace}/build" />
+  <property environment="env"/>
+  <target name="build"
+  depends="prepare,lint,phpcpd,phpcs-ci,"/>
+  <target name="build-parallel" depends="prepare,lint,tools-parallel"/>
+
+  <target name="tools-parallel" description="Run tools in parallel">
+    <parallel threadCount="2">
+      <antcall target="phpcpd"/>
+      <antcall target="phpcs-ci"/>
+    </parallel>
+  </target>
+
+  <target name="clean" description="Cleanup build artifacts">
+    <delete dir="${builddir}/api"/>
+    <delete dir="${builddir}/logs"/>
+  </target>
+
+  <target name="prepare" depends="clean" description="Prepare for build">
+    <mkdir dir="${builddir}/api"/>
+    <mkdir dir="${builddir}/logs"/>
+  </target>
+
+  <target name="lint" description="Perform syntax check of sourcecode files">
+    <apply executable="php" failonerror="true">
+    <arg value="-l" />
+    <fileset dir="${sourcedir}">
+      <include name="**/*.php" />
+      <modified />
+    </fileset>
+    </apply>
+  </target>
+
+  <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+    <exec executable="/usr/local/bin/phpcs">
+      <arg value="--standard=CakePHP" />
+      <arg path="${sourcedir}" />
+    </exec>
+  </target>
+
+  <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+    <exec executable="/usr/local/bin/phpcs">
+      <arg value="--report=checkstyle" />
+      <arg value="--report-file=${builddir}/logs/checkstyle.xml" />
+      <arg value="--standard=CakePHP" />
+      <arg path="${sourcedir}" />
+    </exec>
+  </target>
+
+  <target name="phpcpd" description="Find duplicate code using PHPCPD">
+    <exec executable="/usr/local/bin/phpcpd">
+      <arg value="--log-pmd" />
+      <arg value="${builddir}/logs/pmd-cpd.xml" />
+      <arg path="${sourcedir}" />
+    </exec>
+  </target>
+
+</project>
