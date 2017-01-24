@@ -39,6 +39,7 @@
   <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
     <exec executable="/usr/local/bin/phpcs">
       <arg value="--standard=CakePHP" />
+      <arg value="--ignore=*/plugins/*,*/locale/*,*/tmp/*,*/vendors/*,*/webroot/*" />
       <arg path="${sourcedir}" />
     </exec>
   </target>
@@ -48,6 +49,7 @@
       <arg value="--report=checkstyle" />
       <arg value="--report-file=${builddir}/logs/checkstyle.xml" />
       <arg value="--standard=CakePHP" />
+      <arg value="--ignore=*/plugins/*,*/locale/*,*/tmp/*,*/vendors/*,*/webroot/*" />
       <arg path="${sourcedir}" />
     </exec>
   </target>
@@ -56,6 +58,12 @@
     <exec executable="/usr/local/bin/phpcpd">
       <arg value="--log-pmd" />
       <arg value="${builddir}/logs/pmd-cpd.xml" />
+      <arg value="--exclude" />
+      <arg path="${basedir}/plugins" />
+      <arg path="${basedir}/locale" />
+      <arg path="${basedir}/tmp" />
+      <arg path="${basedir}/vendors" />
+      <arg path="${basedir}/webroot" />
       <arg path="${sourcedir}" />
     </exec>
   </target>
